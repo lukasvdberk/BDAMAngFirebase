@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.bg-image {
+  width: 100%;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.bg-image-col {
+  padding: 0;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border-radius: 0;
+  background-size: cover;
+}
+
+.modal-login {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 0;
+}
+
+.jumbotron {
+  background-image: url("../../assets/images/backgrounds/pokemon-sword-and-shield-poster-art-uhd-4k-wallpaper.jpg");
+}
+
+.custom {
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+}
+
+.custom2{
+  width: 30%;
+}
+
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) { overflow-y: visible !important; }
