@@ -27,7 +27,9 @@ img {
 .header_back {
   color: white;
   border-radius: 10px;
-  padding: 10px 0 10px 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 20px 0 20px 0;
   background-color: rgba(0, 0, 0, 0.2)
 }
 

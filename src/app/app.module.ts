@@ -14,6 +14,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
+import { CountdownComponent } from './countdown/countdown.component';
 
 const appRoutes: Routes = [
   {path: 'admin', component: UserPortalComponent},
@@ -26,6 +27,8 @@ const appRoutes: Routes = [
     UserPortalComponent,
     LoginComponent,
     ScoreboardComponent,
+    CountdownComponent,
+    CountdownComponent,
   ],
   imports: [
     BrowserModule,
