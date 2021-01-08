@@ -10,25 +10,36 @@ import { UserPortalComponent } from './user-portal/user-portal.component';
 import { LoginComponent } from './user-portal/login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MainService} from './shared/main.service';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {far} from '@fortawesome/free-regular-svg-icons';
 
 const appRoutes: Routes = [
-  {path: '', component: UserPortalComponent}
+  {path: 'admin', component: UserPortalComponent},
+  {path: '', component: ScoreboardComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserPortalComponent,
-    LoginComponent
+    LoginComponent,
+    ScoreboardComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FontAwesomeModule
   ],
   providers: [MainService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
+}

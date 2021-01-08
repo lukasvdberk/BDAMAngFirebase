@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FaConfig} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'BDAMAngFirebase';
 
-  constructor() {}
+  constructor(faConfig: FaConfig) {
+    faConfig.fixedWidth = true;
+  }
 
   ngOnInit(): void {
   }

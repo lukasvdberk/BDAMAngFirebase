@@ -1,0 +1,48 @@
+<div class="bg">
+  <div class="container">
+    <div class="row">
+      <div class="row custom">
+        <!-- Begin header -->
+        <div class="col-xs-12 text-center">
+          <img src="../../assets/images/logo/Pokemon-Logo.png" alt="Pokemon logo">
+        </div>
+        <div class="col-xs-6 text-center">
+          <h1 class="header_back">Nog niet begonnen</h1>
+        </div>
+        <div class="col-xs-6 text-center">
+          <h1 class="header_back">De balie is: <a style="color: green">Open</a></h1>
+        </div>
+        <div class="content">
+          <div class="col-xs-12">
+            &nbsp;
+            <hr>
+          </div>
+        </div>
+        <!-- Eind header -->
+
+        <!-- Begin scoreboard -->
+        <div class="col-xs-12 zwbg">
+          <div class="header_back_board" *ngFor="let i of array; let index = index" (click)="openLijst(i, index)">
+            <div class="row">
+              <div class="col-xs-3 text-center">
+                <h1>Groep {{i}}</h1>
+              </div>
+              <div class="col-xs-3 text-center">
+                <h1>Score {{i}}</h1>
+              </div>
+              <div class="col-xs-6 text-center">
+                <h1>Achievements</h1>
+              </div>
+            </div>
+            <div class="row" *ngIf="index === selectedIndex">
+              <div class="col-xs-12 text-center">
+                <h1>Groep {{i}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Einde scoreboard -->
+      </div>
+    </div>
+  </div>
+</div>
