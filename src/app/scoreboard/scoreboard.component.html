@@ -22,13 +22,13 @@
 
         <!-- Begin scoreboard -->
         <div class="col-xs-12 zwbg">
-          <div class="header_back_board" *ngFor="let i of array; let index = index" (click)="openLijst(i, index)">
+          <div class="header_back_board" *ngFor="let i of group | async; let index = index" (click)="openLijst(i, index)">
             <div class="row">
               <div class="col-xs-3 text-center">
-                <h1>Groep {{i}}</h1>
+                <h1>Groep {{i.groepsnummer}}</h1>
               </div>
               <div class="col-xs-3 text-center">
-                <h1>Score {{i}}</h1>
+                <h1>Score: {{i.punten}}</h1>
               </div>
               <div class="col-xs-6 text-center">
                 <h1>Achievements</h1>
@@ -36,7 +36,7 @@
             </div>
             <div class="row" *ngIf="index === selectedIndex">
               <div class="col-xs-12 text-center">
-                <h1>Groep {{i}}</h1>
+                <h1>Groep {{i.groepsnummer}}</h1>
               </div>
             </div>
           </div>

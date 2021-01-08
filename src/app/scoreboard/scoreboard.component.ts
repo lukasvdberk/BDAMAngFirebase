@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
+import {MainService} from "../shared/main.service";
+import {Observable} from "rxjs";
+import {GroupModel} from "../models/group.model";
+
+// const getGroups: Observable<GroupModel[]>;
 
 @Component({
   selector: 'app-scoreboard',
@@ -7,16 +12,22 @@ import Swal from "sweetalert2";
   styleUrls: ['./scoreboard.component.css']
 })
 export class ScoreboardComponent implements OnInit {
+  group: Observable<GroupModel[]>;
 
-  array = [1,2,3,4,5,6,7,8,9,10];
   selectedIndex: number;
 
-  constructor() { }
+  constructor(public main: MainService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.main.getGroups();
+    this.group = this.main.group;
   }
 
   openLijst(i: number, index: number): void {
-    this.selectedIndex = index;
+    if (this.selectedIndex === index){
+      this.selectedIndex = null;
+    } else {
+      this.selectedIndex = index;
+    }
   }
 }
