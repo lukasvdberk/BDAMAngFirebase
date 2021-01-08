@@ -58,6 +58,8 @@ img {
 
 .zwbg {
   background-color: rgba(0, 0, 0, 0.2);
+  padding-top: 15px;
+  padding-bottom: 15px;
   height: 50vh;
   border-radius: 10px;
   overflow-y:auto;

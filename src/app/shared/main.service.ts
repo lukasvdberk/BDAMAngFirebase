@@ -8,7 +8,7 @@ import {AchievementModel} from '../models/achievement.model';
 @Injectable()
 export class MainService{
 
-  // Admin variabelen
+  // Gebruikers variabelen
   usersCollection: AngularFirestoreCollection<UserModel>;
   user: Observable<UserModel[]>;
 
