@@ -26,7 +26,10 @@
         <!-- Begin scoreboard -->
         <div class="col-md-12 zwbg">
           <div class="row">
-            <button class="btn customKnop" (click)="this.main.updateBalie(open)">Update balie</button>
+            <div class="col-md-3 text-center">
+              <h1>Balie status</h1>
+              <button style="color: white" class="btn customKnop" (click)="this.main.updateBool('administratie', 'status', 'open', !this.open)"><a *ngIf="open" style="text-decoration: none; color: white">Sluit balie</a><a *ngIf="!open" style="text-decoration: none; color: white">Open balie</a></button>
+            </div>
           </div>
         </div>
         <!-- Einde scoreboard -->

@@ -58,4 +58,12 @@ export class MainService{
     this.db.collection('administratie').doc('status').update({open: !currValue});
   }
 
+  updateBool(collection, doc, reference, value): void {
+    this.db.collection(collection).doc(doc).update(JSON.parse(`{ "${reference}" : ${value} }`));
+  }
+
+  update(collection, doc, reference, value): void {
+    this.db.collection(collection).doc(doc).update(JSON.parse(`{ "${reference}" : "${value}" }`));
+  }
+
 }

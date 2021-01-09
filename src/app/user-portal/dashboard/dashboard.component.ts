@@ -12,6 +12,10 @@ export class DashboardComponent implements OnInit {
   constructor(public main: MainService) { }
 
   async ngOnInit(): Promise<void> {
+    await this.main.getGroups();
+
+    await this.main.getAchievements();
+
     await this.main.getAdministration();
     this.main.administration.forEach(value => {
       this.open = value[0].open;
