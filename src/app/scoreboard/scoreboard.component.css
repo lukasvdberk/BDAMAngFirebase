@@ -29,7 +29,7 @@ img {
   border-radius: 10px;
   margin-top: 0;
   margin-bottom: 0;
-  padding: 20px 0 20px 0;
+  padding: 20px 0 17px 0;
   background-color: rgba(0, 0, 0, 0.2)
 }
 
@@ -48,6 +48,14 @@ img {
   background-color: rgba(0, 0, 0, 0.2)
 }
 
+.header_back_board3 {
+  color: white;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 0;
+  padding: 5px 0 5px 0;
+}
+
 .bg {
   background-attachment: fixed;
   background-image: url("../../assets/images/backgrounds/pokemon-sword-and-shield-poster-art-uhd-4k-wallpaper.jpg");
@@ -63,4 +71,22 @@ img {
   height: 50vh;
   border-radius: 10px;
   overflow-y:auto;
+}
+
+hr.sb {
+  margin-top: 20px;
+  width: 90%;
+  align-self: center;
+  text-align: center;
+  margin-left: 5%;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.equal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+p {
+  margin: 0 40px 0 40px;
 }

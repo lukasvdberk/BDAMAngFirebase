@@ -13,13 +13,21 @@ export class LoginComponent implements OnInit {
 
   users: UserModel[] = [];
 
-  constructor(private main: MainService) { }
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+  });
+
+  constructor(private main: MainService) {}
 
   ngOnInit(): void {
   }
 
-  async onFormSubmit(postData: { studentnummer: string; groep: string }): Promise<void> {
-    await this.main.checkLogin(postData.studentnummer, postData.groep);
+  async onFormSubmit(postData: { naam: string; wachtwoord: string }): Promise<void> {
+    await this.main.checkLogin(postData.naam, postData.wachtwoord);
     await this.main.user.forEach(value => {
       if (value.length !== 0) {
         Swal.fire(
@@ -28,11 +36,10 @@ export class LoginComponent implements OnInit {
           'success'
         );
       } else {
-        Swal.fire(
-          'Foute inlog',
-          'De combinatie van gegevens is incorrect',
-          'error'
-        );
+        this.Toast.fire({
+          icon: 'error',
+          title: 'Foutieve inloggegevens'
+        });
       }
     });
   }

@@ -5,13 +5,13 @@
       <h1>Login</h1>
     </div>
     <form #postForm="ngForm" (ngSubmit)="onFormSubmit(postForm.value)" class="text-center">
-      <label for="studentnummer">Studentnummer</label>
+      <label for="naam">Naam</label>
       <div class="forangular m-group mb3">
-        <input type="text" [ngClass]="{'failure': !succes}" class="form-control" id="studentnummer" required ngModel name="studentnummer"/>
+        <input type="text" [ngClass]="{'failure': !succes}" class="form-control" id="naam" required ngModel name="naam"/>
       </div>
-      <label for="groep">Groep</label>
+      <label for="wachtwoord">Wachtwoord</label>
       <div class="form-group mb-3">
-        <input type="txet" [ngClass]="{'failure': !succes}" class="form-control" id="groep" required ngModel name="groep"/>
+        <input type="password" [ngClass]="{'failure': !succes}" class="form-control" id="wachtwoord" required ngModel name="wachtwoord"/>
       </div>
 
       <div class="row clearfix das">

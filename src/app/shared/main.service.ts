@@ -1,4 +1,4 @@
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from '@angular/fire/firestore';
 import {UserModel} from '../models/user.model';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
@@ -18,7 +18,7 @@ export class MainService{
 
   // Achievements variabelen
   achievementCollection: AngularFirestoreCollection<AchievementModel>;
-  achievement: Observable<AchievementModel[]>;
+  achievement: Observable<DocumentChangeAction<AchievementModel>[]>;
 
   // Administratie variabelen
   administrationCollection: AngularFirestoreCollection<any>;
@@ -29,9 +29,9 @@ export class MainService{
   }
 
   // Admin functies
-  checkLogin(studentnummer, groep): void {
+  checkLogin(naam, wachtwoord): void {
     this.usersCollection = this.db.collection('users', ref => {
-      return ref.where('studentnummer', '==', studentnummer).where('groep', '==', groep);
+      return ref.where('naam', '==', naam).where('wachtwoord', '==', wachtwoord);
     });
     this.user = this.usersCollection.valueChanges();
   }
@@ -45,7 +45,7 @@ export class MainService{
   // Achievement functies
   getAchievements(): void {
     this.achievementCollection = this.db.collection('achievements');
-    this.achievement = this.achievementCollection.valueChanges();
+    this.achievement = this.achievementCollection.snapshotChanges();
   }
 
   // Administratieve functies
