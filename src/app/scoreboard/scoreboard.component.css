@@ -1,4 +1,6 @@
 .custom {
+  display: flex;
+  flex-direction: column;
   margin-top: 10vh;
   height: 80vh;
   color: white;
@@ -57,19 +59,18 @@ img {
 }
 
 .bg {
-  background-attachment: fixed;
   background-image: url("../../assets/images/backgrounds/pokemon-sword-and-shield-poster-art-uhd-4k-wallpaper.jpg");
   background-size: cover;
-  background-repeat: no-repeat;
   height: 100vh;
 }
 
 .zwbg {
   background-color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
-  height: 50vh;
   border-radius: 10px;
+  flex: 1;
   overflow-y:auto;
 }
 
@@ -89,4 +90,12 @@ hr.sb {
 
 p {
   margin: 0 40px 0 40px;
+}
+
+.customKnop {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+  color: white;
 }
