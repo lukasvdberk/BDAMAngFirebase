@@ -1,0 +1,33 @@
+<div class="bg">
+  <div class="container">
+    <div class="row">
+      <div class="row custom">
+        <!-- Begin header -->
+        <div class="col-xs-12 text-center">
+          <img src="../../assets/images/logo/Pokemon-Logo.png" alt="Pokemon logo">
+        </div>
+        <div class="col-xs-6 text-center">
+          <app-count-down class="header_back"></app-count-down>
+        </div>
+        <div class="col-xs-6 text-center">
+          <h1 *ngIf="open !== null" class="header_back">De balie is: <a style="color: green; pointer-events: none" *ngIf="this.open">Open</a><a style="color: red; pointer-events: none" *ngIf="!this.open">Gesloten</a></h1>
+        </div>
+        <div class="content">
+          <div class="col-xs-12">
+            &nbsp;
+            <hr>
+          </div>
+        </div>
+        <!-- Eind header -->
+
+        <!-- Begin scoreboard -->
+        <div class="col-xs-12 zwbg">
+          <div class="row">
+            <button (click)="this.main.updateBalie(open)">Update balie</button>
+          </div>
+        </div>
+        <!-- Einde scoreboard -->
+      </div>
+    </div>
+  </div>
+</div>

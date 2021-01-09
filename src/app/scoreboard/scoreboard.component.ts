@@ -11,15 +11,12 @@ import {GroupModel} from "../models/group.model";
 })
 export class ScoreboardComponent implements OnInit {
   selectedIndex: number;
-  open = false;
+  open: boolean = null;
 
   constructor(public main: MainService) { }
 
   async ngOnInit(): Promise<void> {
     await this.main.getGroups();
-    this.main.group.forEach(value => {
-      console.log(value);
-    })
 
     await this.main.getAchievements();
 

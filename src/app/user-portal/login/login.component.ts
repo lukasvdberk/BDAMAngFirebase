@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 import {MainService} from '../../shared/main.service';
 import {UserModel} from '../../models/user.model';
 
@@ -9,6 +10,8 @@ import {UserModel} from '../../models/user.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Output() login = new EventEmitter();
+
   succes = true;
 
   users: UserModel[] = [];
@@ -30,11 +33,11 @@ export class LoginComponent implements OnInit {
     await this.main.checkLogin(postData.naam, postData.wachtwoord);
     await this.main.user.forEach(value => {
       if (value.length !== 0) {
-        Swal.fire(
-          'Succesvol ingelogd',
-          'Je wordt nu doorverwezen...',
-          'success'
-        );
+        this.login.emit();
+        this.Toast.fire({
+          icon: 'success',
+          title: 'Login succesvol'
+        });
       } else {
         this.Toast.fire({
           icon: 'error',

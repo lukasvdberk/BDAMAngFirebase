@@ -6,9 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-portal.component.css']
 })
 export class UserPortalComponent implements OnInit {
+  login = false;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  switchView(): void {
+    this.login = !this.login;
   }
 }

@@ -4,7 +4,7 @@
       <h2 *ngFor="let user of users">{{user.naam}}</h2>
       <h1>Login</h1>
     </div>
-    <form #postForm="ngForm" (ngSubmit)="onFormSubmit(postForm.value)" class="text-center">
+    <form #postForm="ngForm" (ngSubmit)="onFormSubmit(postForm.value)" class="text-left">
       <label for="naam">Naam</label>
       <div class="forangular m-group mb3">
         <input type="text" [ngClass]="{'failure': !succes}" class="form-control" id="naam" required ngModel name="naam"/>

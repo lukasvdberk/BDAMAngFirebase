@@ -54,4 +54,8 @@ export class MainService{
     this.administration = this.administrationCollection.valueChanges();
   }
 
+  updateBalie(currValue: boolean): void {
+    this.db.collection('administratie').doc('status').update({open: !currValue});
+  }
+
 }

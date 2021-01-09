@@ -10,7 +10,7 @@
           <app-count-down class="header_back"></app-count-down>
         </div>
         <div class="col-xs-6 text-center">
-          <h1 class="header_back">De balie is: <a style="color: green; pointer-events: none" *ngIf="this.open">Open</a><a style="color: red; pointer-events: none" *ngIf="!this.open">Gesloten</a></h1>
+          <h1 class="header_back" *ngIf="open !== null" >De balie is: <a style="color: green; pointer-events: none" *ngIf="this.open">Open</a><a style="color: red; pointer-events: none" *ngIf="!this.open">Gesloten</a></h1>
         </div>
         <div class="content">
           <div class="col-xs-12">
@@ -38,7 +38,7 @@
               <hr class="sb">
               <div class="equal">
                 <ng-container *ngFor="let j of this.main.achievement | async">
-                  <div class="col-md-6 text-center" [ngStyle]="{'filter': i.achievements.includes(j.payload.doc.id) ? 'grayscale(1)' : 'grayscale(0)'}">
+                  <div class="col-md-6 text-center" [ngStyle]="{'filter': i.achievements.includes(j.payload.doc.id) ? 'opacity(0.5)' : 'grayscale(0)'}">
                     <div class="col-xs-6">
                       <img src="{{j.payload.doc.data().icon}}" alt="" class="header_back_board2">
                     </div>
