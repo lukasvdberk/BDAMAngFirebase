@@ -14,16 +14,6 @@ export class LoginComponent implements OnInit {
 
   succes = true;
 
-  users: UserModel[] = [];
-
-  Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-  });
-
   constructor(private main: MainService) {}
 
   ngOnInit(): void {
@@ -34,12 +24,12 @@ export class LoginComponent implements OnInit {
     await this.main.user.forEach(value => {
       if (value.length !== 0) {
         this.login.emit();
-        this.Toast.fire({
+        this.main.Toast.fire({
           icon: 'success',
           title: 'Login succesvol'
         });
       } else {
-        this.Toast.fire({
+        this.main.Toast.fire({
           icon: 'error',
           title: 'Foutieve inloggegevens'
         });

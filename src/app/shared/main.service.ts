@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {GroupModel} from '../models/group.model';
 import {AchievementModel} from '../models/achievement.model';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class MainService{
@@ -14,7 +15,7 @@ export class MainService{
 
   // Groeps variabelen
   groupCollection: AngularFirestoreCollection<GroupModel>;
-  group: Observable<GroupModel[]>;
+  group: Observable<DocumentChangeAction<GroupModel>[]>;
 
   // Achievements variabelen
   achievementCollection: AngularFirestoreCollection<AchievementModel>;
@@ -22,8 +23,16 @@ export class MainService{
 
   // Administratie variabelen
   administrationCollection: AngularFirestoreCollection<any>;
-  administration: Observable<any[]>;
+  administration: Observable<DocumentChangeAction<any>[]>;
 
+  // SweetAlert2
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+  });
 
   constructor(public db: AngularFirestore) {
   }
@@ -38,8 +47,10 @@ export class MainService{
 
   // Groeps functies
   getGroups(): void {
-    this.groupCollection = this.db.collection('groepen');
-    this.group = this.groupCollection.valueChanges();
+    this.groupCollection = this.db.collection('groepen', ref => {
+      return ref.orderBy('punten', 'desc');
+    });
+    this.group = this.groupCollection.snapshotChanges();
   }
 
   // Achievement functies
@@ -51,19 +62,21 @@ export class MainService{
   // Administratieve functies
   getAdministration(): void {
     this.administrationCollection = this.db.collection('administratie');
-    this.administration = this.administrationCollection.valueChanges();
+    this.administration = this.administrationCollection.snapshotChanges();
   }
 
-  updateBalie(currValue: boolean): void {
-    this.db.collection('administratie').doc('status').update({open: !currValue});
-  }
-
-  updateBool(collection, doc, reference, value): void {
-    this.db.collection(collection).doc(doc).update(JSON.parse(`{ "${reference}" : ${value} }`));
+  async updateBool(collection, doc, reference, value): Promise<void> {
+    await this.db.collection(collection).doc(doc).update(JSON.parse(`{ "${reference}" : ${value} }`));
+    this.Toast.fire({icon: 'success', title: 'Waarde aangepast'});
   }
 
   update(collection, doc, reference, value): void {
     this.db.collection(collection).doc(doc).update(JSON.parse(`{ "${reference}" : "${value}" }`));
+    this.Toast.fire({icon: 'success', title: 'Waarde aangepast'});
+  }
+
+  createSimpleNotification(iconT, titleT): void {
+    this.Toast.fire({icon: iconT, title: titleT});
   }
 
 }

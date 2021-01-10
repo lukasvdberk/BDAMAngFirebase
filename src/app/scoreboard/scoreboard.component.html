@@ -27,10 +27,10 @@
           <div class="header_back_board" *ngFor="let i of this.main.group | async; let index = index" (click)="openLijst(index)">
             <div class="row">
               <div class="col-md-3 text-center">
-                <h1>Groep {{i.groepsnummer}}</h1>
+                <h1>Groep {{i.payload.doc.data().groepsnummer}}</h1>
               </div>
               <div class="col-md-3 text-center">
-                <h1 class="header_back_board3" style="margin-top: 10px">Score: {{i.punten}}</h1>
+                <h1 class="header_back_board3" style="margin-top: 10px">Score: {{i.payload.doc.data().punten}}</h1>
               </div>
               <div class="col-md-6 text-center">
                 <h1>Achievements</h1>
@@ -40,7 +40,7 @@
               <hr class="sb">
               <div class="equal">
                 <ng-container *ngFor="let j of this.main.achievement | async">
-                  <div class="col-md-6 text-center" [ngStyle]="{'filter': i.achievements.includes(j.payload.doc.id) ? 'opacity(0.5)' : 'grayscale(0)'}">
+                  <div class="col-md-6 text-center" [ngStyle]="{'filter': i.payload.doc.data().achievements.includes(j.payload.doc.id) ? 'opacity(0.5)' : 'grayscale(0)'}">
                     <div class="col-xs-6">
                       <img src="{{j.payload.doc.data().icon}}" alt="" class="header_back_board2">
                     </div>

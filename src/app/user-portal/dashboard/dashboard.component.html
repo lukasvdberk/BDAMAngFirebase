@@ -30,6 +30,42 @@
               <h1>Balie status</h1>
               <button style="color: white" class="btn customKnop" (click)="this.main.updateBool('administratie', 'status', 'open', !this.open)"><a *ngIf="open" style="text-decoration: none; color: white">Sluit balie</a><a *ngIf="!open" style="text-decoration: none; color: white">Open balie</a></button>
             </div>
+            <div class="col-md-6 text-center">
+              <h1>Groepen</h1>
+              <h3>Achievements</h3>
+              <div class="col-md-6">
+                <button class="btn customKnop">Wijs achievement aan</button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn customKnop">Ontneem achievement</button>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <h1>Melding</h1>
+              <button class="btn customKnop" (click)="maakMelding()">Maak melding</button><br>
+              <button class="btn customKnop" (click)="verwijderMelding()">Verwijder melding</button>
+            </div>
+          </div>
+          &nbsp;
+          <hr>
+          <div class="row">
+            <div class="col-md-3 text-center">
+              <h1>Nieuwe groep</h1>
+              <button class="btn customKnop" (click)="createNewGroup()">Maak nieuwe groep</button>
+            </div>
+            <div class="col-md-6 text-center">
+              <h1>Achievement</h1>
+              <div class="col-md-6">
+                <button class="btn customKnop">Maak achievement</button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn customKnop">Verwijder achievement</button>
+              </div>
+            </div>
+            <div class="col-md-3 text-center">
+              <h1>Verwijder groep</h1>
+              <button class="btn customKnop" (click)="verwijderGroep()">Verwijder groep</button>
+            </div>
           </div>
         </div>
         <!-- Einde scoreboard -->

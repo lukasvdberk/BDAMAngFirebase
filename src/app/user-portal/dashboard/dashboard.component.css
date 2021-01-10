@@ -99,3 +99,11 @@ p {
 .btn:hover {
   color: white;
 }
+
+.btn {
+  color: white;
+}
+
+.zwbg button {
+  margin-top: 20px;
+}
