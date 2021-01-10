@@ -16,7 +16,6 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
 import { CountdownComponent } from './countdown/countdown.component';
 import { DashboardComponent } from './user-portal/dashboard/dashboard.component';
-import { SortByPipe } from './shared/sort-by.pipe';
 
 const appRoutes: Routes = [
   {path: 'admin', component: UserPortalComponent},
@@ -32,7 +31,6 @@ const appRoutes: Routes = [
     CountdownComponent,
     CountdownComponent,
     DashboardComponent,
-    SortByPipe,
   ],
   imports: [
     BrowserModule,
