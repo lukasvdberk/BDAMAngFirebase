@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit {
           icon: result.value[2],
           punten: result.value[3]
         };
-        this.main.db.collection('achievements').add(achievementData).then((result) => {
+        this.db.collection('achievements').add(achievementData).then((result) => {
           this.main.createSimpleNotification('success', 'Achievement aangemaakt.');
         });
       }
@@ -164,34 +164,4 @@ export class DashboardComponent implements OnInit {
         });
     });
   }
-      // Swal.fire({
-      //   title: 'Selecteer een achievement',
-      //   input: 'select',
-      //   inputOptions: jsonArr,
-      //   inputPlaceholder: 'Selecteer',
-      //   showCancelButton: true,
-      // }).then((result) => {
-      //   console.log(result.value);
-      // });
-
-    // Swal.fire({
-    //   title: 'Verwijder achievement',
-    //   text: 'Geef achievement titel / naam',
-    //   input: 'text',
-    //   inputPlaceholder: 'Achievement naam...',
-    //   confirmButtonText: 'Oke'
-    // }).then((result) => {
-    //   if (result.value !== '' && result.isConfirmed) {
-    //     const docRef = this.db.collection('achievements').snapshotChanges();
-    //     // await docRef.get().forEach((doc) => {
-    //     //   if (doc.exists) {
-    //     //     this.db.collection('groepen').doc(doc.id).delete().then( () => {
-    //     //       this.main.createSimpleNotification('success', `Groep ${result.value} verwijderd!`);
-    //     //     });
-    //     //   } else {
-    //     //     this.main.createSimpleNotification('error', `Groep ${result.value} bestaat niet!!`);
-    //     //   }
-    //     // });
-    //   }
-    // });
 }
