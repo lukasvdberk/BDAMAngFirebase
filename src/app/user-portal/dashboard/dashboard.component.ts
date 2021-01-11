@@ -3,6 +3,7 @@ import {MainService} from '../../shared/main.service';
 import Swal from 'sweetalert2';
 import {AngularFirestore} from '@angular/fire/firestore';
 import firebase from 'firebase';
+import {addWarning} from '@angular-devkit/build-angular/src/utils/webpack-diagnostics';
 
 @Component({
   selector: 'app-dashboard',
@@ -170,6 +171,7 @@ export class DashboardComponent implements OnInit {
 
   koppelAchievement(): void { //TODO DB LOKAAL DONE
     const Json = {};
+    let achievementPunt;
 
     this.db.collection('achievements').get().toPromise().then(querySnapshot => {
       querySnapshot.forEach(i => {
@@ -185,6 +187,8 @@ export class DashboardComponent implements OnInit {
         showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
+          this.db.collection('achievements').doc(result.value).get().toPromise().then(value => achievementPunt = value.data()['punten']);
+
           const groepen = {};
           this.db.collection('groepen').get().toPromise().then(querySnapshot2 => {
             querySnapshot2.forEach(res => {
@@ -202,7 +206,7 @@ export class DashboardComponent implements OnInit {
               if (result2.isConfirmed) {
                 this.db.collection('groepen').doc(result2.value).update({
                   achievements: firebase.firestore.FieldValue.arrayUnion(result.value),
-                  punten: firebase.firestore.FieldValue.increment(20)
+                  punten: firebase.firestore.FieldValue.increment(achievementPunt)
                 }).then(() => {
                   this.main.createSimpleNotification('success', 'Achievement gekoppeld');
                 });
@@ -217,6 +221,7 @@ export class DashboardComponent implements OnInit {
   ontKoppelAchievement(): void { //TODO DB LOKAAL DONE
     const groepen = {};
     const groep = [];
+    let achievementPunt;
 
     this.db.collection('groepen').get().toPromise().then(querySnapshot => {
       querySnapshot.forEach(i => {
@@ -252,11 +257,12 @@ export class DashboardComponent implements OnInit {
               confirmButtonText: 'Oke',
               cancelButtonText: 'Annuleren',
               showCancelButton: true,
-            }).then((result2) => {
+            }).then(async (result2) => {
+              await this.db.collection('achievements').doc(result2.value).get().toPromise().then(value => achievementPunt = (value.data()['punten']));
               if (result2.isConfirmed) {
                 this.db.collection('groepen').doc(result.value).update({
                   achievements: firebase.firestore.FieldValue.arrayRemove(result2.value),
-                  punten: firebase.firestore.FieldValue.increment(-20)
+                  punten: firebase.firestore.FieldValue.increment(-achievementPunt)
                 }).then(() => {
                   this.main.createSimpleNotification('success', 'Achievement weggehaald');
                 });

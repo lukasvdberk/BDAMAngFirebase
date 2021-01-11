@@ -85,7 +85,20 @@ hr.sb {
 
 .equal {
   display: flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
+}
+
+.vcenter {
+  justify-content: right;
+  align-items: center;
+  display: flex;
+  vertical-align: middle;
+  float: none;
+}
+
+.vcenter img {
+  align-self: center;
 }
 
 p {

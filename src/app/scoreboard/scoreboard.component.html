@@ -25,15 +25,19 @@
         <!-- Begin scoreboard -->
         <div class="col-md-12 zwbg">
           <div class="header_back_board" *ngFor="let i of this.main.group | async; let index = index;" (click)="openLijst(index)">
-            <div class="row">
+            <div class="row equal">
               <div class="col-md-3 text-center">
                 <h1>Groep {{i.payload.doc.id}}</h1>
               </div>
               <div class="col-md-3 text-center">
                 <h1 class="header_back_board3" style="margin-top: 10px">Score: {{i.payload.doc.data().punten}}</h1>
               </div>
-              <div class="col-md-6 text-center">
-                <h1>Achievements</h1>
+              <div class="col-md-6 text-right vcenter">
+                <div class="col-md-12 vcenter">
+                  <ng-container *ngFor="let j of this.main.achievement | async">
+                    <img style="width: 10%;" *ngIf="i.payload.doc.data().achievements.includes(j.payload.doc.id)" src="{{j.payload.doc.data().icon}}" alt="" class="header_back_board2">
+                  </ng-container>
+                </div>
               </div>
             </div>
             <div class="row" *ngIf="index === selectedIndex">
