@@ -234,7 +234,7 @@ export class DashboardComponent implements OnInit {
         if (result.isConfirmed) {
           const achieveArr = [];
           const Json = {};
-          await this.db.collection('groepen').doc(result.value).get().toPromise().then(res => {
+          this.db.collection('groepen').doc(result.value).get().toPromise().then(res => {
             achieveArr.push(res.data()['achievements']);
           });
           this.db.collection('achievements').get().toPromise().then(querySnapshot2 => {
