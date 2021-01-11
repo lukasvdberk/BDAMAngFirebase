@@ -83,24 +83,27 @@ export class DashboardComponent implements OnInit {
   }
 
   verwijderGroep(): void {
-    Swal.fire({
-      title: 'Verwijder groep',
-      input: 'number',
-      inputPlaceholder: 'Groepsnummer',
-      confirmButtonText: 'Oke'
-    }).then(async result => {
-      if (result.value !== '' && result.isConfirmed) {
-        const docRef = this.db.collection('groepen').doc(result.value);
-        await docRef.get().forEach((doc) => {
-          if (doc.exists) {
-            this.db.collection('groepen').doc(doc.id).delete().then( () => {
-              this.main.createSimpleNotification('success', `Groep ${result.value} verwijderd!`);
-            });
-          } else {
-            this.main.createSimpleNotification('error', `Groep ${result.value} bestaat niet!!`);
-          }
-        });
-      }
+    const Json = {};
+    const localGroup = this.main.group;
+    localGroup.forEach((value) => {
+      value.forEach(res => {
+        Json[res.payload.doc.id] = 'Groep ' + res.payload.doc.id;
+      });
+      Swal.fire({
+        title: 'Verwijder groep',
+        input: 'select',
+        inputOptions: Json,
+        inputPlaceholder: 'Selecteer',
+        confirmButtonText: 'Oke',
+        cancelButtonText: 'Annuleren',
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.db.collection('groepen').doc(result.value).delete().then( () => {
+            this.main.createSimpleNotification('success', 'Groep verwijderd');
+          });
+        }
+      });
     });
   }
 
