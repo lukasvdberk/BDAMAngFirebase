@@ -24,7 +24,7 @@
 
         <!-- Begin scoreboard -->
         <div class="col-md-12 zwbg">
-          <div class="header_back_board" *ngFor="let i of this.main.group | async; let index = index" (click)="openLijst(index)">
+          <div class="header_back_board" *ngFor="let i of this.main.group | async; let index = index;" (click)="openLijst(index)">
             <div class="row">
               <div class="col-md-3 text-center">
                 <h1>Groep {{i.payload.doc.id}}</h1>

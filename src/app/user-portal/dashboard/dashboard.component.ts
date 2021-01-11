@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainService} from '../../shared/main.service';
 import Swal from 'sweetalert2';
 import {AngularFirestore} from '@angular/fire/firestore';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-dashboard',
@@ -168,12 +169,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  koppelAchievement(): void {
+  async koppelAchievement(): Promise<void> {
     const Json = {};
-    const ach = this.main.achievement;
-    ach.forEach((value) => {
-      value.forEach(res => {
-        Json[res.payload.doc.id] = res.payload.doc.data().naam;
+
+    this.db.collection('achievements').get().toPromise().then(querySnapshot => {
+      querySnapshot.forEach(i => {
+        Json[i.id] = i.data()['naam'];
       });
       Swal.fire({
         title: 'Selecteer een achievement',
@@ -184,12 +185,11 @@ export class DashboardComponent implements OnInit {
         cancelButtonText: 'Annuleren',
         showCancelButton: true,
       }).then((result) => {
-        if (result.isConfirmed){
+        if (result.isConfirmed) {
           const groepen = {};
-          const gru = this.main.group;
-          gru.forEach((value1) => {
-            value1.forEach(res => {
-              groepen[res.payload.doc.id] = 'Groep ' + res.payload.doc.id;
+          this.db.collection('groepen').get().toPromise().then(querySnapshot2 => {
+            querySnapshot2.forEach(res => {
+              groepen[res.id] = 'Groep ' + res.id;
             });
             Swal.fire({
               title: 'Selecteer een groep',
@@ -201,15 +201,16 @@ export class DashboardComponent implements OnInit {
               showCancelButton: true,
             }).then((result2) => {
               if (result2.isConfirmed) {
-                this.db.collection('groepen').doc(result2.value).update({achievements: result.value}).then(() => {
+                this.db.collection('groepen').doc(result2.value).update({
+                  achievements: firebase.firestore.FieldValue.arrayUnion(result.value)
+                }).then(() => {
                   this.main.createSimpleNotification('success', 'Achievement gekoppeld');
                 });
               }
             });
-          }).then(r => { console.log('Tering'); });
+          });
         }
       });
-
     });
   }
 
