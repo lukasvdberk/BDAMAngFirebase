@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MainService} from '../../shared/main.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +9,10 @@ import Swal from "sweetalert2";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  open: boolean = null
+  open: boolean = null;
   melding: string = null;
 
-  constructor(public main: MainService) { }
+  constructor(public main: MainService, private db: AngularFirestore) { }
 
   async ngOnInit(): Promise<void> {
     await this.main.getGroups();
@@ -30,15 +31,15 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  async maakMelding(): Promise<void> {
+  maakMelding(): void {
     if (this.melding === ''){
-      await Swal.fire({
+      Swal.fire({
         title: 'Nieuwe melding',
         input: 'text',
         inputPlaceholder: 'Vul met een nieuwe melding...',
         confirmButtonText: 'Oke'
       }).then(async (result) => {
-        await this.main.db.collection('administratie').doc('melding').set({text: result.value});
+        await this.db.collection('administratie').doc('melding').set({text: result.value});
         this.main.createSimpleNotification('success', 'Melding aangemaakt!');
       });
     } else {
@@ -48,54 +49,57 @@ export class DashboardComponent implements OnInit {
 
   async verwijderMelding(): Promise<void> {
     if (this.melding !== ''){
-      await this.main.db.collection('administratie').doc('melding').update({text: ''});
+      await this.db.collection('administratie').doc('melding').update({text: ''});
       this.main.createSimpleNotification('success', 'Melding verwijderd!');
     } else {
       this.main.createSimpleNotification('error', 'Er bestaat geen melding!');
     }
   }
 
-  async createNewGroup(): Promise<void> {
-    await Swal.fire({
+  createNewGroup(): void {
+    Swal.fire({
       title: 'Nieuwe groep',
       input: 'number',
       inputPlaceholder: 'Groepsnummer',
       confirmButtonText: 'Oke'
-    }).then(result => {
+    }).then(async result => {
       if (result.value !== '' && result.isConfirmed){
-        const data = {
-          achievements: [],
-          groepsnummer: result.value,
-          punten: 0
-        };
-        this.main.db.collection('groepen').add(data).then(res => {
-          this.main.createSimpleNotification('success', `Groep ${result.value} aangemaakt!`);
+        const docRef = this.db.collection('groepen').doc(result.value);
+        await docRef.get().forEach( (doc) => {
+          if (doc.exists){
+            this.main.createSimpleNotification('error', `Groep ${result.value} bestaat al!`);
+          } else {
+            const groupData = {
+              achievements: [],
+              punten: 0
+            };
+            this.db.collection('groepen').doc(result.value).set(groupData).then(res => {
+              this.main.createSimpleNotification('success', `Groep ${result.value} aangemaakt!`);
+            });
+          }
         });
-      } else {
-        this.main.createSimpleNotification('error', 'Je hebt geen waarde opgegeven');
       }
     });
   }
 
-  async verwijderGroep(): Promise<void> {
-    await Swal.fire({
+  verwijderGroep(): void {
+    Swal.fire({
       title: 'Verwijder groep',
       input: 'number',
       inputPlaceholder: 'Groepsnummer',
       confirmButtonText: 'Oke'
     }).then(async result => {
-      if (result.value !== ''){
-        await this.main.group.forEach(value => {
-          for (const i of value){
-            if (result.value === i.payload.doc.data().groepsnummer){
-              this.main.db.collection('groepen').doc(i.payload.doc.id).delete().then( res => {
-                this.main.createSimpleNotification('success', `Groep ${result.value} verwijderd!`);
-              });
-            }
+      if (result.value !== '' && result.isConfirmed) {
+        const docRef = this.db.collection('groepen').doc(result.value);
+        await docRef.get().forEach((doc) => {
+          if (doc.exists) {
+            this.db.collection('groepen').doc(doc.id).delete().then( () => {
+              this.main.createSimpleNotification('success', `Groep ${result.value} verwijderd!`);
+            });
+          } else {
+            this.main.createSimpleNotification('error', `Groep ${result.value} bestaat niet!!`);
           }
         });
-      } else {
-        await this.main.createSimpleNotification('error', 'Je hebt geen waarde opgegeven');
       }
     });
   }

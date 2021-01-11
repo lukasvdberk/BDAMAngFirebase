@@ -34,7 +34,7 @@ export class MainService{
     timerProgressBar: true,
   });
 
-  constructor(public db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
   }
 
   // Admin functies
