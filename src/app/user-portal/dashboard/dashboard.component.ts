@@ -201,7 +201,8 @@ export class DashboardComponent implements OnInit {
             }).then((result2) => {
               if (result2.isConfirmed) {
                 this.db.collection('groepen').doc(result2.value).update({
-                  achievements: firebase.firestore.FieldValue.arrayUnion(result.value)
+                  achievements: firebase.firestore.FieldValue.arrayUnion(result.value),
+                  punten: firebase.firestore.FieldValue.increment(20)
                 }).then(() => {
                   this.main.createSimpleNotification('success', 'Achievement gekoppeld');
                 });
@@ -254,7 +255,8 @@ export class DashboardComponent implements OnInit {
             }).then((result2) => {
               if (result2.isConfirmed) {
                 this.db.collection('groepen').doc(result.value).update({
-                  achievements: firebase.firestore.FieldValue.arrayRemove(result2.value)
+                  achievements: firebase.firestore.FieldValue.arrayRemove(result2.value),
+                  punten: firebase.firestore.FieldValue.increment(-20)
                 }).then(() => {
                   this.main.createSimpleNotification('success', 'Achievement weggehaald');
                 });

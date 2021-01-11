@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import {MainService} from '../shared/main.service';
 
 @Component({
