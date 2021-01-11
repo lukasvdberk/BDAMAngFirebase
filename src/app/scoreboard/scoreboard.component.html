@@ -45,7 +45,7 @@
                       <img src="{{j.payload.doc.data().icon}}" alt="" class="header_back_board2">
                     </div>
                     <div class="col-xs-6">
-                      <h1 class="header_back_board3">{{j.payload.doc.data().punten}}</h1>
+                      <h1 class="header_back_board3" [ngStyle]="{'text-decoration': i.payload.doc.data().achievements.includes(j.payload.doc.id) ? 'line-through' : 'none'}">{{j.payload.doc.data().punten}}</h1>
                     </div>
                     <div class="col xs-12" style="padding: 40px 0 40px 0; margin: 20px 0 20px 0;">
                       <h1>{{j.payload.doc.data().naam}}</h1>

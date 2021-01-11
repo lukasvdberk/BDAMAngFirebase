@@ -167,4 +167,53 @@ export class DashboardComponent implements OnInit {
         });
     });
   }
+
+  koppelAchievement(): void {
+    const Json = {};
+    const ach = this.main.achievement;
+    ach.forEach((value) => {
+      value.forEach(res => {
+        Json[res.payload.doc.id] = res.payload.doc.data().naam;
+      });
+      Swal.fire({
+        title: 'Selecteer een achievement',
+        input: 'select',
+        inputOptions: Json,
+        inputPlaceholder: 'Selecteer',
+        confirmButtonText: 'Oke',
+        cancelButtonText: 'Annuleren',
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed){
+          const groepen = {};
+          const gru = this.main.group;
+          gru.forEach((value1) => {
+            value1.forEach(res => {
+              groepen[res.payload.doc.id] = 'Groep ' + res.payload.doc.id;
+            });
+            Swal.fire({
+              title: 'Selecteer een groep',
+              input: 'select',
+              inputOptions: groepen,
+              inputPlaceholder: 'Selecteer',
+              confirmButtonText: 'Oke',
+              cancelButtonText: 'Annuleren',
+              showCancelButton: true,
+            }).then((result2) => {
+              if (result2.isConfirmed) {
+                this.db.collection('groepen').doc(result2.value).update({achievements: result.value}).then(() => {
+                  this.main.createSimpleNotification('success', 'Achievement gekoppeld');
+                });
+              }
+            });
+          }).then(r => { console.log('Tering'); });
+        }
+      });
+
+    });
+  }
+
+  ontKoppelAchievement(): void {
+
+  }
 }
