@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  maakMelding(): void {
+  maakMelding(): void { //TODO DB LOKAAL DONE
     if (this.melding === ''){
       Swal.fire({
         title: 'Nieuwe melding',
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  async verwijderMelding(): Promise<void> {
+  async verwijderMelding(): Promise<void> { //TODO DB LOKAAL DONE
     if (this.melding !== ''){
       await this.db.collection('administratie').doc('melding').update({text: ''});
       this.main.createSimpleNotification('success', 'Melding verwijderd!');
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  createNewGroup(): void {
+  createNewGroup(): void { //TODO DB LOKAAL DONE
     Swal.fire({
       title: 'Nieuwe groep',
       input: 'number',
@@ -83,12 +83,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  verwijderGroep(): void {
+  verwijderGroep(): void { //TODO DB LOKAAL DONE
     const Json = {};
-    const localGroup = this.main.group;
-    localGroup.forEach((value) => {
+    this.db.collection('groepen').get().toPromise().then(value => {
       value.forEach(res => {
-        Json[res.payload.doc.id] = 'Groep ' + res.payload.doc.id;
+        Json[res.id] = 'Groep ' + res.id;
       });
       Swal.fire({
         title: 'Verwijder groep',
@@ -108,7 +107,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  maakAchievement(): void {
+  maakAchievement(): void { //TODO DB LOKAAL DONE
     Swal.fire({
       title: 'Nieuwe achievement',
       html:
@@ -145,11 +144,11 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  verwijderAchievement(): void {
+  verwijderAchievement(): void { //TODO DB LOKAAL DONE
     const Json = {};
-    this.main.achievement.forEach((value) => {
+    this.db.collection('achievements').get().toPromise().then( value => {
       value.forEach(res => {
-        Json[res.payload.doc.id] = res.payload.doc.data().naam;
+        Json[res.id] = res.data()['naam'];
       });
       Swal.fire({
           title: 'Selecteer een achievement',
@@ -169,7 +168,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  async koppelAchievement(): Promise<void> {
+  koppelAchievement(): void { //TODO DB LOKAAL DONE
     const Json = {};
 
     this.db.collection('achievements').get().toPromise().then(querySnapshot => {
@@ -214,7 +213,56 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  ontKoppelAchievement(): void {
+  ontKoppelAchievement(): void { //TODO DB LOKAAL DONE
+    const groepen = {};
+    const groep = [];
 
+    this.db.collection('groepen').get().toPromise().then(querySnapshot => {
+      querySnapshot.forEach(i => {
+        groepen[i.id] = 'Groep ' + i.id;
+        groep.push(i);
+      });
+      Swal.fire({
+        title: 'Selecteer een groep',
+        input: 'select',
+        inputOptions: groepen,
+        inputPlaceholder: 'Selecteer',
+        confirmButtonText: 'Oke',
+        cancelButtonText: 'Annuleren',
+        showCancelButton: true,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const achieveArr = [];
+          const Json = {};
+          await this.db.collection('groepen').doc(result.value).get().toPromise().then(res => {
+            achieveArr.push(res.data()['achievements']);
+          });
+          this.db.collection('achievements').get().toPromise().then(querySnapshot2 => {
+            querySnapshot2.forEach(res2 => {
+              if (achieveArr[0].includes(res2.id)){
+                Json[res2.id] = res2.data()['naam'];
+              }
+            });
+            Swal.fire({
+              title: 'Selecteer een achievement',
+              input: 'select',
+              inputOptions: Json,
+              inputPlaceholder: 'Selecteer',
+              confirmButtonText: 'Oke',
+              cancelButtonText: 'Annuleren',
+              showCancelButton: true,
+            }).then((result2) => {
+              if (result2.isConfirmed) {
+                this.db.collection('groepen').doc(result.value).update({
+                  achievements: firebase.firestore.FieldValue.arrayRemove(result2.value)
+                }).then(() => {
+                  this.main.createSimpleNotification('success', 'Achievement weggehaald');
+                });
+              }
+            });
+          });
+        }
+      });
+    });
   }
 }
