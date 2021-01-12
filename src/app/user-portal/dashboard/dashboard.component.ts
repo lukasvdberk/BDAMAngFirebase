@@ -63,7 +63,10 @@ export class DashboardComponent implements OnInit {
       title: 'Nieuwe groep',
       input: 'number',
       inputPlaceholder: 'Groepsnummer',
-      confirmButtonText: 'Oke'
+      confirmButtonText: 'Oke',
+      inputValidator: (value) => {
+        return value.length > 3 && 'Je mag groepsnummer mag niet uit meer dan 3 karakters bestaan';
+      }
     }).then(async result => {
       if (result.value !== '' && result.isConfirmed){
         const docRef = this.db.collection('groepen').doc(result.value);
