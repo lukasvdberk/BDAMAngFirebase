@@ -1,8 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import {MainService} from '../../shared/main.service';
-import {UserModel} from '../../models/user.model';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
@@ -14,26 +13,23 @@ export class LoginComponent implements OnInit {
 
   succes = true;
 
-  constructor(private main: MainService) {}
+  constructor(private main: MainService, private afAuth: AngularFireAuth) {}
 
   ngOnInit(): void {
   }
 
   async onFormSubmit(postData: { naam: string; wachtwoord: string }): Promise<void> {
-    await this.main.checkLogin(postData.naam, postData.wachtwoord);
-    await this.main.user.forEach(value => {
-      if (value.length !== 0) {
-        this.login.emit();
-        this.main.Toast.fire({
-          icon: 'success',
-          title: 'Login succesvol'
-        });
-      } else {
-        this.main.Toast.fire({
-          icon: 'error',
-          title: 'Foutieve inloggegevens'
-        });
-      }
+    this.afAuth.signInWithEmailAndPassword(postData.naam, postData.wachtwoord).then(e => {
+      this.login.emit();
+      this.main.Toast.fire({
+        icon: 'success',
+        title: 'Login succesvol'
+      });
+    }, err => {
+      this.main.Toast.fire({
+        icon: 'error',
+        title: 'Foutieve inloggegevens'
+      });
     });
   }
 }

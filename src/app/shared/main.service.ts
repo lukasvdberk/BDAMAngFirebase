@@ -37,14 +37,6 @@ export class MainService{
   constructor(public db: AngularFirestore) {
   }
 
-  // Admin functies
-  checkLogin(naam, wachtwoord): void {
-    this.usersCollection = this.db.collection('users', ref => {
-      return ref.where('naam', '==', naam).where('wachtwoord', '==', wachtwoord);
-    });
-    this.user = this.usersCollection.valueChanges();
-  }
-
   // Groeps functies
   getGroups(): void {
     this.groupCollection = this.db.collection('groepen', ref => {

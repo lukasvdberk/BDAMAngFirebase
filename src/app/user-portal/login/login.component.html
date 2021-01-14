@@ -4,7 +4,7 @@
       <h1>Login</h1>
     </div>
     <form #postForm="ngForm" (ngSubmit)="onFormSubmit(postForm.value)" class="text-left">
-      <label for="naam">Naam</label>
+      <label for="naam">Email</label>
       <div class="forangular m-group mb3">
         <input type="text" [ngClass]="{'failure': !succes}" class="form-control" id="naam" required ngModel name="naam"/>
       </div>

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
 import { UserPortalComponent } from './user-portal/user-portal.component';
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
     FontAwesomeModule
