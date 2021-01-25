@@ -35,7 +35,7 @@
               <div class="col-md-6 text-right vcenter">
                 <div class="col-md-12 vcenter">
                   <ng-container *ngFor="let j of this.main.achievement | async">
-                    <img style="width: 10%;" *ngIf="i.payload.doc.data().achievements.includes(j.payload.doc.id)" src="{{j.payload.doc.data().icon}}" alt="" class="header_back_board2">
+                    <img style="width: 10%;" *ngIf="i.payload.doc.data().achievements.includes(j.payload.doc.id)" src="assets/images/pokemon/{{j.payload.doc.data().icon}}.png" alt="" class="header_back_board2">
                   </ng-container>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                 <ng-container *ngFor="let j of this.main.achievement | async">
                   <div class="col-md-6 text-center" [ngStyle]="{'filter': i.payload.doc.data().achievements.includes(j.payload.doc.id) ? 'opacity(0.5)' : 'grayscale(0)'}">
                     <div class="col-xs-6">
-                      <img src="{{j.payload.doc.data().icon}}" alt="" class="header_back_board2">
+                      <img src="assets/images/pokemon/{{j.payload.doc.data().icon}}.png" alt="" class="header_back_board2">
                     </div>
                     <div class="col-xs-6">
                       <h1 class="header_back_board3" [ngStyle]="{'text-decoration': i.payload.doc.data().achievements.includes(j.payload.doc.id) ? 'line-through' : 'none'}">{{j.payload.doc.data().punten}}</h1>

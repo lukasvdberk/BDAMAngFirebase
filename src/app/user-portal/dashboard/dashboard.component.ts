@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit {
         '<label for="swal-input2" type="text">Beschrijving</label>' +
         '<input id="swal-input2" class="swal2-input">' +
         '<label for="swal-input3">Icoon Nummer (Pokedex nummer)</label>' +
-        '<input id="swal-input3" type="number" class="swal2-input">' +
+        '<input id="swal-input3" type="number" class="swal2-input"><br>' +
         '<label for="swal-input4">Punten waard</label><br>' +
         '<input id="swal-input4" type="number" class="swal2-input">',
       focusConfirm: false,
