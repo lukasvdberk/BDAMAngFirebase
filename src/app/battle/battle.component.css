@@ -1,0 +1,19 @@
+.bg {
+  background-image: url("../../assets/images/backgrounds/pokemon-sword-and-shield-poster-art-uhd-4k-wallpaper.jpg");
+  background-size: cover;
+  height: 100vh;
+}
+
+.custom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+  height: 80vh;
+  color: white;
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
+  padding: 0 20px 0 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2)
+}

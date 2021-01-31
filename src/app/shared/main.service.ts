@@ -1,9 +1,9 @@
 import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from '@angular/fire/firestore';
-import {UserModel} from '../models/user.model';
+import {UserModel} from './models/user.model';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {GroupModel} from '../models/group.model';
-import {AchievementModel} from '../models/achievement.model';
+import {GroupModel} from './models/group.model';
+import {AchievementModel} from './models/achievement.model';
 import Swal from 'sweetalert2';
 
 @Injectable()

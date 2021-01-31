@@ -15,11 +15,13 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
-import { CountdownComponent } from './countdown/countdown.component';
+import { CountdownComponent } from './scoreboard/countdown/countdown.component';
 import { DashboardComponent } from './user-portal/dashboard/dashboard.component';
+import { BattleComponent } from './battle/battle.component';
 
 const appRoutes: Routes = [
   {path: 'admin', component: UserPortalComponent},
+  {path: 'battle', component: BattleComponent},
   {path: '', component: ScoreboardComponent}
 ];
 
@@ -32,6 +34,7 @@ const appRoutes: Routes = [
     CountdownComponent,
     CountdownComponent,
     DashboardComponent,
+    BattleComponent,
   ],
   imports: [
     BrowserModule,
