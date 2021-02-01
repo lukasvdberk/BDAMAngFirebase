@@ -80,3 +80,7 @@ hr {
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.2)
 }
+
+span {
+  cursor: pointer;
+}

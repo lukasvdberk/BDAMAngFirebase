@@ -71,4 +71,20 @@ export class BattleComponent implements OnInit {
       }
     }
   }
+
+  moveDownwards(groep: number, eigenIndex: number): void {
+    if (groep === 1){
+      this.pokemonGroep1.splice(eigenIndex + 1, 0, this.pokemonGroep1.splice(eigenIndex, 1)[0]);
+    } else if (groep === 2){
+      this.pokemonGroep2.splice(eigenIndex + 1, 0, this.pokemonGroep2.splice(eigenIndex, 1)[0]);
+    }
+  }
+
+  moveUpwards(groep: number, eigenIndex: number): void {
+    if (groep === 1){
+      this.pokemonGroep1.splice(eigenIndex - 1, 0, this.pokemonGroep1.splice(eigenIndex, 1)[0]);
+    } else if (groep === 2){
+      this.pokemonGroep2.splice(eigenIndex - 1, 0, this.pokemonGroep2.splice(eigenIndex, 1)[0]);
+    }
+  }
 }

@@ -11,12 +11,17 @@
             <h1>Groep {{this.groep1}}</h1>
             <hr>
             <div class="scroll">
-              <div class="header_back_board" *ngFor="let k of pokemonGroep1">
+              <div class="header_back_board" *ngFor="let k of pokemonGroep1; let index = index">
                 <div class="row">
                   <div class="col-md-4" style="height: 100%">
                     <img src="../../assets/images/pokemon/{{k.id}}.png" alt="" class="header_back_board2">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-2" style="margin-top: 5%">
+                    <span *ngIf="index !== 0" class="glyphicon glyphicon-arrow-up" aria-hidden="true" (click)="moveUpwards(1, index)"></span>
+                    <br>
+                    <span *ngIf="index !== pokemonGroep1.length - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true" (click)="moveDownwards(1, index)"></span>
+                  </div>
+                  <div class="col-md-6">
                     <h2>{{k.name}}</h2>
                   </div>
                 </div>
@@ -28,12 +33,17 @@
             <h1>Groep {{this.groep2}}</h1>
             <hr>
             <div class="scroll">
-              <div class="header_back_board" *ngFor="let i of pokemonGroep2">
+              <div class="header_back_board" *ngFor="let i of pokemonGroep2; let index = index">
                 <div class="row">
                   <div class="col-md-4" style="height: 100%">
                     <img src="../../assets/images/pokemon/{{i.id}}.png" alt="" class="header_back_board2">
                   </div>
-                  <div class="col-md-8">
+                  <div class="col-md-2" style="margin-top: 5%">
+                    <span *ngIf="index !== 0" class="glyphicon glyphicon-arrow-up" aria-hidden="true" (click)="moveUpwards(2, index)"></span>
+                    <br>
+                    <span *ngIf="index !== pokemonGroep2.length - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true" (click)="moveDownwards(2, index)"></span>
+                  </div>
+                  <div class="col-md-6">
                     <h2>{{i.name}}</h2>
                   </div>
                 </div>
