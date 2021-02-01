@@ -5,6 +5,7 @@ import {MainService} from '../shared/services/main.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {BattleService} from '../shared/services/battle.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-battle',
@@ -20,7 +21,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         opacity: 0,
       })),
       transition('open => closed', [
-        animate('1s')
+        animate('0.5s')
       ]),
       transition('closed => open', [
         animate('0.5s')
@@ -85,7 +86,9 @@ export class BattleComponent implements OnInit {
     const audio = new Audio('../../assets/audio/battle.mp3');
     audio.load();
     audio.play();
-    audio.
+    audio.addEventListener('ended', res => {
+      this.beginBattle = false;
+    });
   }
 
   pokemonBattle(): void {
