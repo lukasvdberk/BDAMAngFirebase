@@ -18,6 +18,7 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import { CountdownComponent } from './scoreboard/countdown/countdown.component';
 import { DashboardComponent } from './user-portal/dashboard/dashboard.component';
 import { BattleComponent } from './battle/battle.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   {path: 'admin', component: UserPortalComponent},
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

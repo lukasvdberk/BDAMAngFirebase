@@ -4,18 +4,36 @@ import Swal from 'sweetalert2';
 import {MainService} from '../shared/services/main.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {BattleService} from '../shared/services/battle.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-battle',
   templateUrl: './battle.component.html',
   styleUrls: ['./battle.component.css'],
-  providers: [BattleService]
+  providers: [BattleService],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        opacity: 1,
+      })),
+      state('closed', style({
+        opacity: 0,
+      })),
+      transition('open => closed', [
+        animate('1s')
+      ]),
+      transition('closed => open', [
+        animate('0.5s')
+      ]),
+    ]),
+  ],
 })
 export class BattleComponent implements OnInit {
   public pokemonGroep1: PokemonModel[] = [];
   public groep1: string;
   public pokemonGroep2: PokemonModel[] = [];
   public groep2: string;
+  beginBattle = false;
 
   constructor(private db: AngularFirestore, private main: MainService, private battle: BattleService) { }
 
@@ -62,8 +80,12 @@ export class BattleComponent implements OnInit {
     });
   }
 
-  battleStart(): void {
-
+  async battleStart(): Promise<void> {
+    this.beginBattle = true;
+    const audio = new Audio('../../assets/audio/battle.mp3');
+    audio.load();
+    audio.play();
+    audio.
   }
 
   pokemonBattle(): void {
