@@ -62,12 +62,20 @@ export class BattleComponent implements OnInit {
     });
   }
 
+  battleStart(): void {
+
+  }
+
   pokemonBattle(): void {
+    console.log(this.pokemonGroep2);
+    console.log(this.pokemonGroep1);
     if (!this.pokemonGroep1.length){
       this.loadGroups();
     } else {
       if (this.pokemonGroep1.length > 3 || this.pokemonGroep2.length > 3){
         this.main.createSimpleNotification('warning', 'Kies 3 pokemons per groep');
+      } else {
+        this.battleStart();
       }
     }
   }

@@ -19,7 +19,7 @@
                   <div class="col-md-2" style="margin-top: 5%">
                     <span *ngIf="index !== 0" class="glyphicon glyphicon-arrow-up" aria-hidden="true" (click)="moveUpwards(1, index)"></span>
                     <br>
-                    <span class="glyphicon glyphicon-remove" (click)="removeFromList(2, index)" *ngIf="pokemonGroep1.length > 3"></span>
+                    <span class="glyphicon glyphicon-remove" (click)="removeFromList(1, index)" *ngIf="pokemonGroep1.length > 3"></span>
                     <br *ngIf="pokemonGroep1.length > 3">
                     <span *ngIf="index !== pokemonGroep1.length - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true" (click)="moveDownwards(1, index)"></span>
                   </div>
