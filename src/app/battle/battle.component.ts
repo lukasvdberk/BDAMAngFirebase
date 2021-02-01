@@ -87,4 +87,12 @@ export class BattleComponent implements OnInit {
       this.pokemonGroep2.splice(eigenIndex - 1, 0, this.pokemonGroep2.splice(eigenIndex, 1)[0]);
     }
   }
+
+  removeFromList(lijst: number, index: number): void {
+    if (lijst === 1){
+      this.pokemonGroep1.splice(index, 1);
+    } else if (lijst === 2){
+      this.pokemonGroep2.splice(index, 1);
+    }
+  }
 }

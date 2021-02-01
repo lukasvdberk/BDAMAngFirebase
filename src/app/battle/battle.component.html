@@ -19,6 +19,8 @@
                   <div class="col-md-2" style="margin-top: 5%">
                     <span *ngIf="index !== 0" class="glyphicon glyphicon-arrow-up" aria-hidden="true" (click)="moveUpwards(1, index)"></span>
                     <br>
+                    <span class="glyphicon glyphicon-remove" (click)="removeFromList(2, index)" *ngIf="pokemonGroep1.length > 3"></span>
+                    <br *ngIf="pokemonGroep1.length > 3">
                     <span *ngIf="index !== pokemonGroep1.length - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true" (click)="moveDownwards(1, index)"></span>
                   </div>
                   <div class="col-md-6">
@@ -38,9 +40,11 @@
                   <div class="col-md-4" style="height: 100%">
                     <img src="../../assets/images/pokemon/{{i.id}}.png" alt="" class="header_back_board2">
                   </div>
-                  <div class="col-md-2" style="margin-top: 5%">
+                  <div class="col-md-2" style="margin-top: 3%">
                     <span *ngIf="index !== 0" class="glyphicon glyphicon-arrow-up" aria-hidden="true" (click)="moveUpwards(2, index)"></span>
                     <br>
+                    <span class="glyphicon glyphicon-remove" (click)="removeFromList(2, index)" *ngIf="pokemonGroep2.length > 3"></span>
+                    <br *ngIf="pokemonGroep2.length > 3">
                     <span *ngIf="index !== pokemonGroep2.length - 1" class="glyphicon glyphicon-arrow-down" aria-hidden="true" (click)="moveDownwards(2, index)"></span>
                   </div>
                   <div class="col-md-6">
