@@ -17,3 +17,66 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0.2)
 }
+
+.battle {
+  height: 100%;
+}
+
+.groep {
+  margin: 0;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 70%;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2)
+}
+
+.knop {
+  margin: 0;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.customKnop {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 20px 50px 20px 50px;
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+hr {
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+  margin: 0 0 20px 0;
+}
+
+.header_back_board {
+  height: 100px;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 0 10px 0;
+  margin: 5px 0 5px 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 75%;
+}
+
+.header {
+  width: 20%;
+}
+
+.row {
+  height: 100%;
+}
+
+.header_back_board2 {
+  height: 100%;
+  margin-left: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2)
+}

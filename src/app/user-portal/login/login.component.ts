@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import 'sweetalert2/src/sweetalert2.scss';
-import {MainService} from '../../shared/main.service';
+import {MainService} from '../../shared/services/main.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 
 @Component({

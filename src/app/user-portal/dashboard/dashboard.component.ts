@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MainService} from '../../shared/main.service';
+import {MainService} from '../../shared/services/main.service';
 import Swal from 'sweetalert2';
 import {AngularFirestore} from '@angular/fire/firestore';
 import firebase from 'firebase';

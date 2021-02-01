@@ -10,7 +10,7 @@ import {FormsModule} from '@angular/forms';
 import { UserPortalComponent } from './user-portal/user-portal.component';
 import { LoginComponent } from './user-portal/login/login.component';
 import {RouterModule, Routes} from '@angular/router';
-import {MainService} from './shared/main.service';
+import {MainService} from './shared/services/main.service';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {fas} from '@fortawesome/free-solid-svg-icons';

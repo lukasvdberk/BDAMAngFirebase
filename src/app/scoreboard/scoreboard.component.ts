@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {MainService} from '../shared/main.service';
+import {MainService} from '../shared/services/main.service';
 
 @Component({
   selector: 'app-scoreboard',

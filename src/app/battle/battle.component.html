@@ -2,7 +2,46 @@
   <div class="container">
     <div class="row">
       <div class="custom">
-        <p>battle works!</p>
+        <div class="col-md-12 text-center">
+          <img class="header" src="../../assets/images/logo/Pokemon-Logo.png" alt="Pokemon logo" [routerLink]="['/']" style="cursor: pointer">
+        </div>
+        <div class="battle text-center">
+          <div class="col-md-1"></div>
+          <div class="col-md-4 groep">
+            <h1>Groep {{this.groep1}}</h1>
+            <hr>
+            <div class="scroll">
+              <div class="header_back_board" *ngFor="let k of pokemonGroep1">
+                <div class="row">
+                  <div class="col-md-4" style="height: 100%">
+                    <img src="../../assets/images/pokemon/{{k.id}}.png" alt="" class="header_back_board2">
+                  </div>
+                  <div class="col-md-8">
+                    <h2>{{k.name}}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 knop"><button class="btn btn-primary customKnop" (click)="pokemonBattle()">Battle!</button></div>
+          <div class="col-md-4 groep">
+            <h1>Groep {{this.groep2}}</h1>
+            <hr>
+            <div class="scroll">
+              <div class="header_back_board" *ngFor="let i of pokemonGroep2">
+                <div class="row">
+                  <div class="col-md-4" style="height: 100%">
+                    <img src="../../assets/images/pokemon/{{i.id}}.png" alt="" class="header_back_board2">
+                  </div>
+                  <div class="col-md-8">
+                    <h2>{{i.name}}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
       </div>
     </div>
   </div>
