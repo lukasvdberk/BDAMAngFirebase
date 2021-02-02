@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PokemonModel} from '../shared/models/pokemon.model';
 import Swal from 'sweetalert2';
 import {MainService} from '../shared/services/main.service';
@@ -36,6 +36,10 @@ export class BattleComponent implements OnInit {
   beginBattle = false;
   beginBattle2 = false;
   switch = false;
+
+  @ViewChild('pok1') pok1: ElementRef;
+  @ViewChild('pok2') pok2: ElementRef;
+  ListIndex = 0;
 
   constructor(private db: AngularFirestore, private main: MainService, private battle: BattleService) { }
 
@@ -91,6 +95,45 @@ export class BattleComponent implements OnInit {
       this.switch = true;
       this.beginBattle2 = true;
     }, 1500);
+    // Begin van het gevecht;
+
+    setTimeout(() => {
+      this.fight(this.pok1, 'rechts');
+    }, 2500);
+    setTimeout(() => {
+      this.fight(this.pok2, 'links');
+    }, 3500);
+    setTimeout(() => {
+      this.fade('out', this.pok1, this.pok2);
+    }, 4500);
+    setTimeout(() => {
+      this.ListIndex++;
+      this.fade('in', this.pok1, this.pok2);
+    }, 5500);
+    setTimeout(() => {
+      this.fight(this.pok1, 'rechts');
+    }, 6500);
+    setTimeout(() => {
+      this.fight(this.pok2, 'links');
+    }, 7500);
+    setTimeout(() => {
+      this.fade('out', this.pok1, this.pok2);
+    }, 8500);
+    setTimeout(() => {
+      this.ListIndex++;
+      this.fade('in', this.pok1, this.pok2);
+    }, 9500);
+    setTimeout(() => {
+      this.fight(this.pok1, 'rechts');
+    }, 10500);
+    setTimeout(() => {
+      this.fight(this.pok2, 'links');
+    }, 11500);
+    setTimeout(() => {
+      this.fade('out', this.pok1, this.pok2);
+    }, 12500);
+
+    // Aan het einde switch weer terug.
     audio.addEventListener('ended', res => {
       this.switch = !this.switch;
       setTimeout(() => {
@@ -137,6 +180,96 @@ export class BattleComponent implements OnInit {
       this.pokemonGroep1.splice(index, 1);
     } else if (lijst === 2){
       this.pokemonGroep2.splice(index, 1);
+    }
+  }
+
+  fight(el: ElementRef, richting: string): void{
+    if (richting === 'rechts'){
+      setTimeout(() => {
+        const audio = new Audio('../../assets/audio/Tackle.mp3');
+        audio.load();
+        audio.play();
+      }, 250 );
+      el.nativeElement.animate(
+        [
+          {transform: 'translateX(0)'},
+          {transform: 'translateX(200px)'},
+          {transform: 'translateX(0)'},
+        ],
+        {
+          duration: 500,
+          delay: 0,
+          fill: 'both',
+          easing : 'ease-in-out'
+        }
+      );
+    } else if (richting === 'links'){
+      setTimeout(() => {
+        const audio = new Audio('../../assets/audio/Tackle.mp3');
+        audio.load();
+        audio.play();
+      }, 250 );
+      el.nativeElement.animate(
+        [
+          {transform: 'translateX(0)'},
+          {transform: 'translateX(-200px)'},
+          {transform: 'translateX(0)'},
+        ],
+        {
+          duration: 500,
+          delay: 0,
+          fill: 'both',
+          easing : 'ease-in-out'
+        }
+      );
+    }
+
+  }
+
+  private fade(fade: string, pok1: ElementRef, pok2: ElementRef): void {
+    if (fade === 'out'){
+      pok1.nativeElement.animate([
+          {opacity: 0},
+        ],
+        {
+          duration: 500,
+          delay: 0,
+          fill: 'both',
+          easing : 'ease-out'
+        }
+      );
+      pok2.nativeElement.animate([
+          {opacity: 0},
+        ],
+        {
+          duration: 500,
+          delay: 0,
+          fill: 'both',
+          easing : 'ease-out'
+        }
+      );
+    }
+    else if (fade === 'in'){
+      pok1.nativeElement.animate([
+          {opacity: 1},
+        ],
+        {
+          duration: 500,
+          delay: 0,
+          fill: 'both',
+          easing : 'ease-out'
+        }
+      );
+      pok2.nativeElement.animate([
+          {opacity: 1},
+        ],
+        {
+          duration: 500,
+          delay: 0,
+          fill: 'both',
+          easing : 'ease-out'
+        }
+      );
     }
   }
 }

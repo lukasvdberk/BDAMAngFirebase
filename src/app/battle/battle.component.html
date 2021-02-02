@@ -62,6 +62,6 @@
 </div>
 
 <div class="beginGevecht" [@openClose]="!switch ? 'closed' : 'open'" [ngClass]="(beginBattle2)?'show':'verberg'">
-  <img class="pokemon1" src="../../assets/images/pokemon/back/{{this.pokemonGroep1[0].id}}.png" alt="Pokemon 1">
-  <img class="pokemon2" src="../../assets/images/pokemon/{{this.pokemonGroep2[0].id}}.png" alt="Pokemon 2">
+  <img #pok1 class="pokemon1" src="../../assets/images/pokemon/back/{{this.pokemonGroep1[this.ListIndex].id}}.png" alt="Pokemon 1">
+  <img #pok2 class="pokemon2" src="../../assets/images/pokemon/{{this.pokemonGroep2[this.ListIndex].id}}.png" alt="Pokemon 2">
 </div>
