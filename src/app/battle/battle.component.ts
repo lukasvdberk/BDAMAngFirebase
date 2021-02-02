@@ -5,7 +5,6 @@ import {MainService} from '../shared/services/main.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {BattleService} from '../shared/services/battle.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-battle',
@@ -21,10 +20,10 @@ import {Observable} from 'rxjs';
         opacity: 0,
       })),
       transition('open => closed', [
-        animate('0.5s')
+        animate('1.5s')
       ]),
       transition('closed => open', [
-        animate('0.5s')
+        animate('1.5s')
       ]),
     ]),
   ],
@@ -35,6 +34,8 @@ export class BattleComponent implements OnInit {
   public pokemonGroep2: PokemonModel[] = [];
   public groep2: string;
   beginBattle = false;
+  beginBattle2 = false;
+  switch = false;
 
   constructor(private db: AngularFirestore, private main: MainService, private battle: BattleService) { }
 
@@ -86,8 +87,18 @@ export class BattleComponent implements OnInit {
     const audio = new Audio('../../assets/audio/battle.mp3');
     audio.load();
     audio.play();
+    setTimeout(() => {
+      this.switch = true;
+      this.beginBattle2 = true;
+    }, 1500);
     audio.addEventListener('ended', res => {
-      this.beginBattle = false;
+      this.switch = !this.switch;
+      setTimeout(() => {
+        this.beginBattle2 = !this.beginBattle2;
+        setTimeout(() => {
+          this.beginBattle = false;
+        }, 10);
+      }, 1500);
     });
   }
 

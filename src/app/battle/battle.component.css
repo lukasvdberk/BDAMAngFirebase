@@ -84,3 +84,30 @@ hr {
 span {
   cursor: pointer;
 }
+
+.beginGevecht {
+  background-image: url("../../assets/images/backgrounds/grasspok.jpg");
+  background-size: 100% 100%;
+  height: 100vh;
+}
+
+.verberg {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.pokemon1 {
+  position: absolute;
+  bottom: 0%;
+  height: 80%;
+}
+
+.pokemon2 {
+  position: absolute;
+  left: 65%;
+  top: 10%;
+  width: 30%;
+}
