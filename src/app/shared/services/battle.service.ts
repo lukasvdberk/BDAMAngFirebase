@@ -1,9 +1,14 @@
 import {PokemonModel} from '../models/pokemon.model';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, DocumentSnapshot} from '@angular/fire/firestore';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class BattleService {
+  // Battle service
+  battleCollection: AngularFirestoreCollection<any>;
+  battle: Observable<DocumentChangeAction<any>[]>;
+
   constructor(private db: AngularFirestore) {}
 
   async getPokemonsFromGroup(id: number): Promise<PokemonModel[]> {
@@ -18,5 +23,10 @@ export class BattleService {
       }
     });
     return pokemonGroep;
+  }
+
+  getBattle(): void {
+    this.battleCollection = this.db.collection('battle');
+    this.battle = this.battleCollection.snapshotChanges();
   }
 }

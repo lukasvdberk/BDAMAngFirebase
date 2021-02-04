@@ -1,8 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PokemonModel} from '../shared/models/pokemon.model';
 import Swal from 'sweetalert2';
 import {MainService} from '../shared/services/main.service';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {BattleService} from '../shared/services/battle.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -41,48 +40,31 @@ export class BattleComponent implements OnInit {
   @ViewChild('pok2') pok2: ElementRef;
   ListIndex = 0;
 
-  constructor(private db: AngularFirestore, private main: MainService, private battle: BattleService) { }
+  constructor(private main: MainService, public battle: BattleService) { }
 
-  ngOnInit(): void {
-    this.loadGroups();
+  async ngOnInit(): Promise<void> {
+    this.setUpLink();
   }
 
-  loadGroups(): void {
-    const groepen = {};
-    this.db.collection('groepen').get().toPromise().then(querySnapshot2 => {
-      querySnapshot2.forEach(res => {
-        groepen[res.id] = 'Groep ' + res.id;
-      });
-      Swal.fire({
-        title: 'Selecteer de eerste groep',
-        input: 'select',
-        inputOptions: groepen,
-        inputPlaceholder: 'Selecteer',
-        confirmButtonText: 'Oke',
-        cancelButtonText: 'Annuleren',
-        showCancelButton: true,
-      }).then((result2) => {
-        if (result2.isConfirmed) {
-          const groepen2 = groepen;
-          delete groepen2[result2.value];
-          Swal.fire({
-            title: 'Selecteer de tegenpartij',
-            input: 'select',
-            inputOptions: groepen,
-            inputPlaceholder: 'Selecteer',
-            confirmButtonText: 'Oke',
-            cancelButtonText: 'Annuleren',
-            showCancelButton: true,
-          }).then(async res => {
-            if (res.isConfirmed){
-              this.pokemonGroep1 = await this.battle.getPokemonsFromGroup(result2.value);
-              this.pokemonGroep2 = await this.battle.getPokemonsFromGroup(res.value);
-              this.groep1 = result2.value;
-              this.groep2 = res.value;
+  async setUpLink(): Promise<void> {
+    await this.battle.getBattle();
+    this.battle.battle.forEach(async value => {
+      for (const i of value) {
+        const val = i.payload.doc;
+        if (val.id === 'current') {
+          const num = val.data().group;
+          this.pokemonGroep1.length = 0;
+          this.pokemonGroep2.length = 0;
+          if (num[0] !== undefined){
+            this.pokemonGroep1 = await this.battle.getPokemonsFromGroup(num[0]);
+            this.groep1 = String(num[0]);
+            if (num[1] !== undefined){
+              this.pokemonGroep2 = await this.battle.getPokemonsFromGroup(num[1]);
+              this.groep2 = String(num[1]);
             }
-          });
+          }
         }
-      });
+      }
     });
   }
 
@@ -146,10 +128,8 @@ export class BattleComponent implements OnInit {
   }
 
   pokemonBattle(): void {
-    console.log(this.pokemonGroep2);
-    console.log(this.pokemonGroep1);
     if (!this.pokemonGroep1.length){
-      this.loadGroups();
+      // Do nothing
     } else {
       if (this.pokemonGroep1.length > 3 || this.pokemonGroep2.length > 3){
         this.main.createSimpleNotification('warning', 'Kies 3 pokemons per groep');
@@ -272,4 +252,5 @@ export class BattleComponent implements OnInit {
       );
     }
   }
+
 }

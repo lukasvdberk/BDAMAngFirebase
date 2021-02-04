@@ -11,7 +11,7 @@
             <h1>Groep {{this.groep1}}</h1>
             <hr>
             <div class="scroll">
-              <div class="header_back_board" *ngFor="let k of pokemonGroep1; let index = index">
+              <div class="header_back_board" *ngFor="let k of pokemonGroep1; let index = index;">
                 <div class="row">
                   <div class="col-md-4" style="height: 100%">
                     <img src="../../assets/images/pokemon/{{k.id}}.png" alt="" class="header_back_board2">
@@ -61,7 +61,7 @@
   </div>
 </div>
 
-<div class="beginGevecht" [@openClose]="!switch ? 'closed' : 'open'" [ngClass]="(beginBattle2)?'show':'verberg'">
+<div class="beginGevecht" [@openClose]="!switch ? 'closed' : 'open'" [ngClass]="(beginBattle2)?'show':'verberg'" *ngIf="this.pokemonGroep2.length !== 0">
   <img #pok1 class="pokemon1" src="../../assets/images/pokemon/back/{{this.pokemonGroep1[this.ListIndex].id}}.png" alt="Pokemon 1">
   <img #pok2 class="pokemon2" src="../../assets/images/pokemon/{{this.pokemonGroep2[this.ListIndex].id}}.png" alt="Pokemon 2">
 </div>
