@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PokemonModel} from '../shared/models/pokemon.model';
 import Swal from 'sweetalert2';
 import {MainService} from '../shared/services/main.service';
 import {BattleService} from '../shared/services/battle.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import firebase from "firebase";
 
 @Component({
   selector: 'app-battle',
@@ -53,15 +54,15 @@ export class BattleComponent implements OnInit {
         const val = i.payload.doc;
         if (val.id === 'current') {
           const num = val.data().group;
-          this.pokemonGroep1.length = 0;
-          this.pokemonGroep2.length = 0;
+          // this.pokemonGroep1.length = 0;
+          // this.pokemonGroep2.length = 0;
           if (num[0] !== undefined){
             this.pokemonGroep1 = await this.battle.getPokemonsFromGroup(num[0]);
             this.groep1 = String(num[0]);
-            if (num[1] !== undefined){
-              this.pokemonGroep2 = await this.battle.getPokemonsFromGroup(num[1]);
-              this.groep2 = String(num[1]);
-            }
+          }
+          if (num[1] !== undefined){
+            this.pokemonGroep2 = await this.battle.getPokemonsFromGroup(num[1]);
+            this.groep2 = String(num[1]);
           }
         }
       }
@@ -122,6 +123,7 @@ export class BattleComponent implements OnInit {
         this.beginBattle2 = !this.beginBattle2;
         setTimeout(() => {
           this.beginBattle = false;
+          this.clearArray();
         }, 10);
       }, 1500);
     });
@@ -253,4 +255,13 @@ export class BattleComponent implements OnInit {
     }
   }
 
+  private clearArray(): void {
+    this.main.db.collection('battle').doc('current').set({
+      group: []
+    });
+    this.pokemonGroep1.length = 0;
+    this.pokemonGroep2.length = 0;
+    this.groep1 = '';
+    this.groep2 = '';
+  }
 }
