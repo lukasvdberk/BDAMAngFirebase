@@ -82,39 +82,39 @@ export class BattleComponent implements OnInit {
 
     setTimeout(() => {
       this.fight(this.pok1, 'rechts');
-    }, 2500);
-    setTimeout(() => {
-      this.fight(this.pok2, 'links');
     }, 3500);
     setTimeout(() => {
+      this.fight(this.pok2, 'links');
+    }, 5000);
+    setTimeout(() => {
       this.fade('out', this.pok1, this.pok2);
-    }, 4500);
-    setTimeout(() => {
-      this.ListIndex++;
-      this.fade('in', this.pok1, this.pok2);
-    }, 5500);
-    setTimeout(() => {
-      this.fight(this.pok1, 'rechts');
     }, 6500);
     setTimeout(() => {
-      this.fight(this.pok2, 'links');
-    }, 7500);
-    setTimeout(() => {
-      this.fade('out', this.pok1, this.pok2);
-    }, 8500);
-    setTimeout(() => {
       this.ListIndex++;
       this.fade('in', this.pok1, this.pok2);
-    }, 9500);
+    }, 8000);
     setTimeout(() => {
       this.fight(this.pok1, 'rechts');
-    }, 10500);
+    }, 9500);
     setTimeout(() => {
       this.fight(this.pok2, 'links');
-    }, 11500);
+    }, 11000);
     setTimeout(() => {
       this.fade('out', this.pok1, this.pok2);
     }, 12500);
+    setTimeout(() => {
+      this.ListIndex++;
+      this.fade('in', this.pok1, this.pok2);
+    }, 14000);
+    setTimeout(() => {
+      this.fight(this.pok1, 'rechts');
+    }, 15500);
+    setTimeout(() => {
+      this.fight(this.pok2, 'links');
+    }, 17000);
+    setTimeout(() => {
+      this.fade('out', this.pok1, this.pok2);
+    }, 18500);
 
     // Aan het einde switch weer terug.
     audio.addEventListener('ended', res => {
@@ -130,8 +130,8 @@ export class BattleComponent implements OnInit {
   }
 
   pokemonBattle(): void {
-    if (!this.pokemonGroep1.length){
-      // Do nothing
+    if (!this.pokemonGroep1.length || !this.pokemonGroep2.length){
+      this.main.createSimpleNotification('error', '1 of meerdere groepen moeten nog ingeladen worden!');
     } else {
       if (this.pokemonGroep1.length > 3 || this.pokemonGroep2.length > 3){
         this.main.createSimpleNotification('warning', 'Kies 3 pokemons per groep');
