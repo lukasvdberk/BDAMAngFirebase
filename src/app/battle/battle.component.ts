@@ -24,20 +24,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         animate('1.5s')
       ]),
     ]),
-    trigger('openCloseFast', [
-      state('open', style({
-        opacity: 1,
-      })),
-      state('closed', style({
-        opacity: 0,
-      })),
-      transition('open => closed', [
-        animate('0.5s')
-      ]),
-      transition('closed => open', [
-        animate('0.5s')
-      ]),
-    ]),
   ],
 })
 export class BattleComponent implements OnInit {
@@ -50,7 +36,9 @@ export class BattleComponent implements OnInit {
   beginBattle3 = false;
   eindBattle = false;
   eindBattleAnim = false;
+  eindBattleAnim2 = false;
   switch = false;
+  winningTeam = '';
 
   @ViewChild('pok1') pok1: ElementRef;
   @ViewChild('pok2') pok2: ElementRef;
@@ -92,8 +80,10 @@ export class BattleComponent implements OnInit {
       this.beginBattle2 = true;
       this.beginBattle3 = true;
     }, 1500);
-    // Begin van het gevecht;
 
+    this.berekenWinst();
+
+    // Begin van het gevecht;
     setTimeout(() => {
       this.fight(this.pok1, 'rechts');
     }, 3500);
@@ -136,17 +126,24 @@ export class BattleComponent implements OnInit {
       this.beginBattle2 = false;
       this.eindBattle = !this.eindBattle;
       this.eindBattleAnim = !this.eindBattleAnim;
+      this.beginBattle3 = false;
     }, 24000);
+    setTimeout(() => {
+      this.beginBattle = false;
+    }, 24001);
 
     // Aan het einde switch weer terug.
     audio.addEventListener('ended', res => {
+      this.eindBattleAnim = !this.eindBattleAnim;
+      this.beginBattle3 = false;
+      this.beginBattle = false;
       setTimeout(() => {
-        setTimeout(() => {
-          this.beginBattle3 = false;
-          this.beginBattle = false;
-          this.clearArray();
-        }, 10);
-      }, 1500);
+        this.clearArray();
+        this.eindBattle = false;
+      }, 2000);
+      setTimeout(() => {
+        this.eindBattleAnim2 = false;
+      }, 2050);
     });
   }
 
@@ -284,5 +281,36 @@ export class BattleComponent implements OnInit {
     this.pokemonGroep2.length = 0;
     this.groep1 = '';
     this.groep2 = '';
+  }
+
+  private berekenWinst(): void {
+    const winnaar: number[] = [];
+    let win1 = 0;
+    let win2 = 0;
+    for (let i = 0; i < this.pokemonGroep1.length; i++){
+      winnaar.push(this.pokemonWin(this.pokemonGroep1[i], this.pokemonGroep2[i]));
+    }
+    for (const i of winnaar){
+      if (i === 1){
+        win1++;
+      } else if (i === 2){
+        win2++;
+      }
+    }
+    if (win1 > win2){
+      this.winningTeam = this.groep1;
+    } else if (win1 > win2) {
+      this.winningTeam = this.groep2;
+    }
+  }
+
+  private pokemonWin(pok1: PokemonModel, pok2: PokemonModel): number {
+    let team = 0;
+    if ((pok1.attack + pok1.defense) < (pok2.attack + pok2.defense)){
+      team = 1;
+    } else if ((pok1.attack + pok1.defense) > (pok2.attack + pok2.defense)){
+      team = 2;
+    }
+    return team;
   }
 }

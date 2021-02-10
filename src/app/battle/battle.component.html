@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="custom">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center" *ngIf="!eindBattle" [@openClose]="eindBattleAnim2 ? 'closed' : 'open'">
           <img class="header" src="../../assets/images/logo/Pokemon-Logo.png" alt="Pokemon logo" [routerLink]="['/']" style="cursor: pointer">
         </div>
-        <div class="battle text-center">
+        <div class="battle text-center" *ngIf="!eindBattle" [@openClose]="eindBattleAnim2 ? 'closed' : 'open'">
           <div class="col-md-1"></div>
           <div class="col-md-4 groep">
             <h1>Groep {{this.groep1}}</h1>
@@ -56,6 +56,14 @@
           </div>
           <div class="col-md-1"></div>
         </div>
+        <div class="vertical-center" [@openClose]="!eindBattleAnim ? 'closed' : 'open'" [ngClass]="(eindBattle)?'show':'verberg'" *ngIf="eindBattle">
+          <div class="col-md-12 text-center">
+            <img src="https://www.transparentpng.com/thumb/winner/ZLRxdI-winner-transparent-background-image.png" alt="" class="eindeFoto">
+          </div>
+          <div class="col-md-12 text-center">
+            <h1>Groep {{winningTeam}} heeft gewonnen!</h1>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -64,9 +72,4 @@
 <div class="beginGevecht" [@openClose]="!switch ? 'closed' : 'open'" [ngClass]="(beginBattle2)?'show':'verberg'" *ngIf="this.pokemonGroep2.length !== 0">
   <img #pok1 class="pokemon1" src="../../assets/images/pokemon/back/{{this.pokemonGroep1[this.ListIndex].id}}.png" alt="Pokemon 1">
   <img #pok2 class="pokemon2" src="../../assets/images/pokemon/{{this.pokemonGroep2[this.ListIndex].id}}.png" alt="Pokemon 2">
-</div>
-
-<div class="eindeGevecht" [@openCloseFast]="!eindBattleAnim ? 'closed' : 'open'" [ngClass]="(eindBattle)?'show':'verberg'" *ngIf="this.pokemonGroep2.length !== 0">
-  <img src="" alt="">
-  <h1>HOI ASDAISDJUIOASDHJIOPAUSDH</h1>
 </div>
