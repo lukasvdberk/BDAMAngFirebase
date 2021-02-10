@@ -1,4 +1,4 @@
-<div class="bg" [@openClose]="!beginBattle ? 'open' : 'closed'" *ngIf="!beginBattle2">
+<div class="bg" [@openClose]="!beginBattle ? 'open' : 'closed'" *ngIf="!beginBattle3">
   <div class="container">
     <div class="row">
       <div class="custom">
@@ -64,4 +64,9 @@
 <div class="beginGevecht" [@openClose]="!switch ? 'closed' : 'open'" [ngClass]="(beginBattle2)?'show':'verberg'" *ngIf="this.pokemonGroep2.length !== 0">
   <img #pok1 class="pokemon1" src="../../assets/images/pokemon/back/{{this.pokemonGroep1[this.ListIndex].id}}.png" alt="Pokemon 1">
   <img #pok2 class="pokemon2" src="../../assets/images/pokemon/{{this.pokemonGroep2[this.ListIndex].id}}.png" alt="Pokemon 2">
+</div>
+
+<div class="eindeGevecht" [@openCloseFast]="!eindBattleAnim ? 'closed' : 'open'" [ngClass]="(eindBattle)?'show':'verberg'" *ngIf="this.pokemonGroep2.length !== 0">
+  <img src="" alt="">
+  <h1>HOI ASDAISDJUIOASDHJIOPAUSDH</h1>
 </div>
