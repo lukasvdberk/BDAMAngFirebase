@@ -172,7 +172,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  koppelAchievement(): void { //TODO DB LOKAAL DONE
+  koppelAchievement(): void {
     const Json = {};
     let achievementPunt;
 
@@ -195,7 +195,9 @@ export class DashboardComponent implements OnInit {
           const groepen = {};
           this.db.collection('groepen').get().toPromise().then(querySnapshot2 => {
             querySnapshot2.forEach(res => {
-              groepen[res.id] = 'Groep ' + res.id;
+              if (!res.data()['achievements'].includes(result.value)){
+                groepen[res.id] = 'Groep ' + res.id;
+              }
             });
             Swal.fire({
               title: 'Selecteer een groep',
@@ -221,7 +223,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  ontKoppelAchievement(): void { //TODO DB LOKAAL DONE
+  ontKoppelAchievement(): void {
     const groepen = {};
     const groep = [];
     let achievementPunt;
