@@ -3,6 +3,7 @@ import {PokemonModel} from '../shared/models/pokemon.model';
 import {MainService} from '../shared/services/main.service';
 import {BattleService} from '../shared/services/battle.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-battle',
@@ -299,8 +300,10 @@ export class BattleComponent implements OnInit {
     }
     if (win1 > win2){
       this.winningTeam = this.groep1;
+      this.main.db.collection('groepen').doc(this.groep1).update({ punten: firebase.firestore.FieldValue.increment(10) });
     } else if (win1 > win2) {
       this.winningTeam = this.groep2;
+      this.main.db.collection('groepen').doc(this.groep2).update({ punten: firebase.firestore.FieldValue.increment(10) });
     }
   }
 
