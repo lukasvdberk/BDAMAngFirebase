@@ -33,9 +33,7 @@ De raspberry pi maakt gebruik van verschillende NPM packages. Het is aangeraden 
 **Zorg ervoor dat NodeJS en NPM geïnstalleerd zijn om door te kunnen gaan**
 
 Voer het onderstaande commando uit voor de eerste keer: 
-```bash
-sudo npm install --save
-```
-
+1. Schakel SPI in met ```raspi-config```
+2. Download de node packages ```sudo npm install --save```
 
 **© HSLeiden 2020-2021**
