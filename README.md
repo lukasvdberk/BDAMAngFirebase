@@ -36,4 +36,7 @@ Voer het onderstaande commando uit voor de eerste keer:
 1. Schakel SPI in met ```raspi-config```
 2. Download de node packages ```sudo npm install --save```
 
+**Sluit de PI en RFID + Buzzer aan volgens het volgende schema**
+![Aansluit schema](https://file.coffee/u/yXljnP-v3v.png)
+
 **© HSLeiden 2020-2021**
