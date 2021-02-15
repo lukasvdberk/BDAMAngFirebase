@@ -39,6 +39,8 @@ Voer het onderstaande commando uit voor de eerste keer:
 **Sluit de PI en RFID + Buzzer aan volgens het volgende schema**
 ![Aansluit schema](https://file.coffee/u/yXljnP-v3v.png)
 
+Aansluit schema (Alleen voor de RFID lezer / schrijver)
+
 | Naam | Pin # | Pin naam    |
 | ---- | :---: | ----------- |
 | SDA  |  24   | GPIO8       |
