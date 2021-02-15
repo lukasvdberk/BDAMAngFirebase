@@ -1,27 +1,29 @@
-# BDAMAngFirebase
+# BDAM Angular Firebase Challengeweek
+Dit project bestaat uit de volgende stukken software: 
+- Angular project (Scoreboard, Admin paneel en battle applicatie)
+- NodeJS applicatie (Raspberry PI RFID lezer en schrijver)
+- Firebase Firestore en Authentication (Web project)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+## Benodigdheden
+- Een Raspberry PI met internet verbinding (Pi Zero werkt ook, maar je NodeJS installatie moet wel voldoen aan de ARM6 achitectuur)
+- RFID-RC522 chip (https://nl.aliexpress.com/wholesale?catId=0&initiative_id=SB_20210215045723&SearchText=rfid-rc522)
+- RFID tags
+- Een firebase project
 
-## Development server
+## Aantekeningen
+- **Dit project maakt gebruik van Firebase Firestore en Firebase Authenticator**
+- **Bij een nieuw project zal het scoreboard niet gelijk werken en errors in de console opleveren. Log eerst als administrator in (Dit vult de firestore database)**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Firebase (Hieronder wordt uitgelegd hoe je het project met een eigen firebase project kan opstellen)
+- Administrator accounts zijn gekoppeld aan firebase authenticator. Maak in firebase authentication een gebruiker aan om gebruik te kunnen maken van administrator features.
+- NodeJS: Projectinstellingen -> Serviceaccounts -> Nieuwe privésleutel genereren. Plaats het JSON bestand in dezelfde map van pokemon.js
+- Angular: Open het project in een IDE en maak in de SRC map een "environments" folder. Maak een nieuw bestand en noem deze environment.prod.ts en vul deze met de volgende data: ```typescript
+export const environment = {
+  production: false,
+  firebase: {
+   // Stop hier alle de JSON info van jouw firebase project (Projectinstellingen -> Algemeen -> Firebase SDK Snippet)
+  }
+};
+```
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**© HSLeiden 2020-2021**
