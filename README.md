@@ -39,4 +39,15 @@ Voer het onderstaande commando uit voor de eerste keer:
 **Sluit de PI en RFID + Buzzer aan volgens het volgende schema**
 ![Aansluit schema](https://file.coffee/u/yXljnP-v3v.png)
 
+| Naam | Pin # | Pin naam    |
+| ---- | :---: | ----------- |
+| SDA  |  24   | GPIO8       |
+| SCK  |  23   | GPIO11      |
+| MOSI |  19   | GPIO10      |
+| MISO |  21   | GPIO9       |
+| IRQ  | None  | None        |
+| GND  | Elke  | Elke ground |
+| RST  |  22   | GPIO25      |
+| 3.3V |   1   | 3v3         |
+
 **© HSLeiden 2020-2021**
