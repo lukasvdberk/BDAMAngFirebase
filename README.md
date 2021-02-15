@@ -17,7 +17,8 @@ Dit project bestaat uit de volgende stukken software:
 ## Firebase (Hieronder wordt uitgelegd hoe je het project met een eigen firebase project kan opstellen)
 - Administrator accounts zijn gekoppeld aan firebase authenticator. Maak in firebase authentication een gebruiker aan om gebruik te kunnen maken van administrator features.
 - NodeJS: Projectinstellingen -> Serviceaccounts -> Nieuwe privésleutel genereren. Plaats het JSON bestand in dezelfde map van pokemon.js
-- Angular: Open het project in een IDE en maak in de SRC map een "environments" folder. Maak een nieuw bestand en noem deze environment.prod.ts en vul deze met de volgende data: ```typescript
+- Angular: Open het project in een IDE en maak in de SRC map een "environments" folder. Maak een nieuw bestand en noem deze environment.prod.ts en vul deze met de volgende data: 
+```typescript
 export const environment = {
   production: false,
   firebase: {
