@@ -37,6 +37,7 @@ Voer het onderstaande commando uit voor de eerste keer:
 2. Download de node packages ```sudo npm install --save```
 
 **Sluit de PI en RFID + Buzzer aan volgens het volgende schema**
+
 ![Aansluit schema](https://file.coffee/u/yXljnP-v3v.png)
 
 Aansluit schema (Alleen voor de RFID lezer / schrijver)
